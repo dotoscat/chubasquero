@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="material.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="chubasquero.css">
         <script src="material.js"></script>
         <script src="vue.js"></script>
         <title>Pelican chubasquero</title>
@@ -21,7 +22,17 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
-        <div>Content</div>
+        <div id="contenido">
+            <section id="posts" class="">
+                <ul class="mdl-list" v-for="post in posts">
+                    <!--
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-conten">Uno</span>
+                    </li>
+                    -->
+                </ul>
+            </section>
+        </div>
       </main>
     </div>
 
