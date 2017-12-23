@@ -1,17 +1,19 @@
 import webbrowser
 from wsgiref.simple_server import make_server
-from flask import Flask
+import flask
 
 HOST = "127.0.0.1"
 PORT = 8080
 
-app = Flask(__name__)
+app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
-def hello_world():
-    return "Hello world"
+def index():
+    with open("static/index.html") as index:
+        return index.read();
 
 with make_server(HOST, PORT, app) as httpd:
-    print(httpd.server_address)
-    webbrowser.open("http://{}:{}".format(HOST, PORT))
+    url = "http://{}:{}".format(HOST, PORT)
+    print("open", url)
+    webbrowser.open(url)
     httpd.serve_forever()
