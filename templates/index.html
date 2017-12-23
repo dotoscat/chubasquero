@@ -28,12 +28,10 @@
       <main class="mdl-layout__content">
         <div id="contenido">
             <section id="posts" class="">
-                <ul class="mdl-list" v-for="post in posts">
-                    <!--
-                    <li class="mdl-list__item">
-                        <span class="mdl-list__item-primary-conten">Uno</span>
+                <ul class="mdl-list">
+                    <li class="mdl-list__item" v-for="post in posts">
+                        <span class="mdl-list__item-primary-content">${ post }</span>
                     </li>
-                    -->
                 </ul>
             </section>
         </div>
