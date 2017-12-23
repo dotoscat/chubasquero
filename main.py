@@ -4,16 +4,15 @@ import flask
 
 HOST = "127.0.0.1"
 PORT = 8080
+URL = "http://{}:{}".format(HOST, PORT)
 
 app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
 def index():
-    with open("static/index.html") as index:
-        return index.read();
+    return flask.render_template("index.html", **{"server": URL})
 
 with make_server(HOST, PORT, app) as httpd:
-    url = "http://{}:{}".format(HOST, PORT)
-    print("open", url)
-    webbrowser.open(url)
+    print("open", URL)
+    webbrowser.open(URL)
     httpd.serve_forever()
