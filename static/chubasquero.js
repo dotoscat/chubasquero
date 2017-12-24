@@ -1,15 +1,20 @@
-function generateSite () {
-    const request = fetch(CHUBASQUERO_SERVER + "/generate-site");
+'use strict';
+
+/**
+ * This performs a fetch (with GET) to the server.
+ * 
+ * This functions depends of CHUBASQUERO_SERVER.
+ * 
+ * @param {string} Rute of the server
+ * @returns {promise} A json promise 
+ */
+function requestGetToServer(rute) {
+    const request = fetch(CHUBASQUERO_SERVER + rute);
     return request.then((response) => response.json());
 }
 
 function previewSite () {
     console.log("previsualizar sitio");
-}
-
-function getPostList () {
-    const request = fetch(CHUBASQUERO_SERVER + "/posts");
-    return request.then((response) => response.json());
 }
 
 const chubasquero = new Vue({
@@ -25,22 +30,35 @@ const chubasquero = new Vue({
         serverResponse: {returncode: 0, stdout: "", stderr: ""}
     },
     methods: {
+        /**
+         * Clean the current sections.
+         * 
+         * Actually what this does is set all the show group to false
+         */
         cleanView: function (){
             this.showPosts = false,
             this.showEditor = false,
             this.showGenerateSite = false
         },
+        /**
+         * Prepare content to edit a post
+         */
         newPost: function () {
             this.cleanView();
             this.showEditor = true;
+            // TODO: create an emtpy post object
             console.log("new post")
         },
+        /**
+         * Change content to manage posts
+         */
         managePosts: function () {
             this.cleanView();
             this.showPosts = true;
             this.loadingPosts = true;
             this.posts = [];
-            getPostList().then((posts) => {
+            requestGetToServer("/posts")
+            .then((posts) => {
                 console.log("posts", posts);
                 this.posts = posts;
                 this.loadingPosts = false;
@@ -49,11 +67,15 @@ const chubasquero = new Vue({
                 this.loadingPosts = false;
             });
         },
+        /**
+         * Generate a site and wait for server response
+         */
         generateSite: function () {
             this.cleanView();
             this.showGenerateSite = true;
             this.generatingSite = true;
-            generateSite().then((response) => {
+            requestGetToServer("/generate-site")
+            .then((response) => {
                 console.log("response", response);
                 this.$set(this, "serverResponse", response);
                 this.generatingSite = false;
