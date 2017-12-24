@@ -19,9 +19,22 @@ const chubasquero = new Vue({
     data: {
         posts: [],
         loadingPosts: false,
+        showPosts: false,
+        showEditor: false
     },
     methods: {
+        cleanView: function (){
+            this.showPosts = false,
+            this.showEditor = false
+        },
+        newPost: function () {
+            this.cleanView();
+            this.showEditor = true;
+            console.log("new post")
+        },
         managePosts: function () {
+            this.cleanView();
+            this.showPosts = true;
             this.loadingPosts = true;
             getPostList().then((posts) => {
                 console.log("posts", posts);
