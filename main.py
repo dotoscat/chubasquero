@@ -2,6 +2,11 @@ import json
 import webbrowser
 from wsgiref.simple_server import make_server
 import flask
+try:
+    import pelicanconf
+except ImportError:
+    print("pelicanconf not found.")
+    exit(1)
 
 HOST = "127.0.0.1"
 PORT = 8080
