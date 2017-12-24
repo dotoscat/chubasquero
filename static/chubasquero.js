@@ -60,7 +60,7 @@ const chubasquero = new Vue({
             requestGetToServer("/posts")
             .then((posts) => {
                 console.log("posts", posts);
-                this.posts = posts;
+                this.$set(this, "posts", posts);
                 this.loadingPosts = false;
             }, (error) => {
                 console.error("posts", error);
@@ -84,11 +84,5 @@ const chubasquero = new Vue({
             });
         },
         previewSite: previewSite,
-    },
-    watch: {
-        posts: function (value) {
-            console.log("watch posts");
-            this.posts = value;
-        }
     }
 });
