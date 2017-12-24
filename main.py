@@ -23,6 +23,11 @@ def get_posts():
     posts = json.dumps(["Uno", "Dos", "Y tres...", "..."])
     return posts
 
+@app.route("/generate-site")
+def generate_site():
+    response = {"code": "7", "message": "Wiiii!"}
+    return json.dumps(response)
+
 with make_server(HOST, PORT, app) as httpd:
     print("open", URL)
     webbrowser.open(URL)

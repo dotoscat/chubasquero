@@ -1,5 +1,6 @@
 function generateSite () {
-    console.log("generar sitio");
+    const request = fetch(CHUBASQUERO_SERVER + "/generate-site");
+    return request.then((response) => response.json());
 }
 
 function previewSite () {
@@ -11,8 +12,6 @@ function getPostList () {
     return request.then((response) => response.json());
 }
 
-const contenido = document.getElementById("contenido");
-
 const chubasquero = new Vue({
     delimiters: ["${", "}"],
     el: '#chubasquero',
@@ -20,12 +19,16 @@ const chubasquero = new Vue({
         posts: [],
         loadingPosts: false,
         showPosts: false,
-        showEditor: false
+        showEditor: false,
+        showGenerateSite: false,
+        generatingSite: false,
+        serverResponse: {code: 0, message: ""}
     },
     methods: {
         cleanView: function (){
             this.showPosts = false,
-            this.showEditor = false
+            this.showEditor = false,
+            this.showGenerateSite = false
         },
         newPost: function () {
             this.cleanView();
@@ -36,6 +39,7 @@ const chubasquero = new Vue({
             this.cleanView();
             this.showPosts = true;
             this.loadingPosts = true;
+            this.posts = [];
             getPostList().then((posts) => {
                 console.log("posts", posts);
                 this.posts = posts;
@@ -45,7 +49,18 @@ const chubasquero = new Vue({
                 this.loadingPosts = false;
             });
         },
-        generateSite: generateSite,
+        generateSite: function () {
+            this.cleanView();
+            this.showGenerateSite = true;
+            this.generatingSite = true;
+            generateSite().then((response) => {
+                console.log("response", response);
+                this.$set(this, "serverResponse", response);
+                this.generatingSite = false;
+            }, (error) => {
+                this.generatingSite = false;
+            });
+        },
         previewSite: previewSite,
     },
     watch: {
