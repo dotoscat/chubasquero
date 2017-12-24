@@ -5,11 +5,11 @@
  * 
  * This functions depends of CHUBASQUERO_SERVER.
  * 
- * @param {string} Rute of the server
+ * @param {string} route Route of the server
  * @returns {promise} A json promise 
  */
-function requestGetToServer(rute) {
-    const request = fetch(CHUBASQUERO_SERVER + rute);
+function requestGetToServer(route) {
+    const request = fetch(CHUBASQUERO_SERVER + route);
     return request.then((response) => response.json());
 }
 
