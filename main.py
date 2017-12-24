@@ -1,3 +1,4 @@
+import subprocess
 import json
 import webbrowser
 from wsgiref.simple_server import make_server
@@ -25,7 +26,11 @@ def get_posts():
 
 @app.route("/generate-site")
 def generate_site():
-    response = {"code": "7", "message": "Wiiii!"}
+    completed = subprocess.run("pelican", stdout=subprocess.PIPE
+        , stderr=subprocess.PIPE)
+    response = {"returncode": completed.returncode
+        , "stdout": completed.stdout.decode()
+        , "stderr": completed.stderr.decode()}
     return json.dumps(response)
 
 with make_server(HOST, PORT, app) as httpd:

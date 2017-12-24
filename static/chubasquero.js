@@ -22,7 +22,7 @@ const chubasquero = new Vue({
         showEditor: false,
         showGenerateSite: false,
         generatingSite: false,
-        serverResponse: {code: 0, message: ""}
+        serverResponse: {returncode: 0, stdout: "", stderr: ""}
     },
     methods: {
         cleanView: function (){

@@ -64,7 +64,8 @@
             <section id="generate-site" v-show="showGenerateSite">
                 <h4>Generating site</h4>
                 <div id="progressSite" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": generatingSite}'></div>
-                <p>${serverResponse.code}: ${serverResponse.message}</p>
+                <p>${serverResponse.stdout}</p>
+                <p style="color: red;">${serverResponse.stderr}</p>
             </section>
             
         </div>
