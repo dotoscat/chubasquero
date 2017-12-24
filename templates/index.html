@@ -27,6 +27,7 @@
       </div>
       <main class="mdl-layout__content">
         <div id="contenido">
+            <div id="progressPosts" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": loadingPosts}'></div>
             <section id="posts" class="">
                 <ul class="mdl-list">
                     <li class="mdl-list__item" v-for="post in posts">

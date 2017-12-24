@@ -1,7 +1,3 @@
-function managePosts () {
-    console.log("gestionar posts");
-}
-
 function generateSite () {
     console.log("generar sitio");
 }
@@ -28,15 +24,23 @@ const chubasquero = new Vue({
     delimiters: ["${", "}"],
     el: '#chubasquero',
     data: {
-        posts: ["Uno", "Dos"]
+        posts: [],
+        loadingPosts: false,
     },
     methods: {
-        managePosts: managePosts,
+        managePosts: function () {
+            this.loadingPosts = true;
+            getPostList().then((posts) => {
+                this.loadingPosts = false;
+                this.posts = posts;
+            });
+        },
         generateSite: generateSite,
         previewSite: previewSite,
     },
     watch: {
         posts: function (value) {
+            console.log("watch posts");
             this.posts = value;
         }
     }

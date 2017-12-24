@@ -1,4 +1,6 @@
-#posts {
+#contenido {
     width: 50%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
 }
