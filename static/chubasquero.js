@@ -7,15 +7,8 @@ function previewSite () {
 }
 
 function getPostList () {
-    return new Promise((success, fail) => {
-        setTimeout(() => {
-            success([
-                "Uno",
-                "Dos",
-                "Tres",
-            ]);
-        }, 2000);
-    });
+    const request = fetch(CHUBASQUERO_SERVER + "/posts");
+    return request.then((response) => response.json());
 }
 
 const contenido = document.getElementById("contenido");
@@ -31,8 +24,12 @@ const chubasquero = new Vue({
         managePosts: function () {
             this.loadingPosts = true;
             getPostList().then((posts) => {
-                this.loadingPosts = false;
+                console.log("posts", posts);
                 this.posts = posts;
+                this.loadingPosts = false;
+            }, (error) => {
+                console.error("posts", error);
+                this.loadingPosts = false;
             });
         },
         generateSite: generateSite,

@@ -1,3 +1,4 @@
+import json
 import webbrowser
 from wsgiref.simple_server import make_server
 import flask
@@ -11,6 +12,11 @@ app = flask.Flask(__name__, static_url_path='')
 @app.route("/")
 def index():
     return flask.render_template("index.html", **{"server": URL})
+
+@app.route("/posts", methods=["GET"])
+def get_posts():
+    posts = json.dumps(["Uno", "Dos", "Y tres...", "..."])
+    return posts
 
 with make_server(HOST, PORT, app) as httpd:
     print("open", URL)
