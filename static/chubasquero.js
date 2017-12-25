@@ -1,5 +1,24 @@
 'use strict';
 
+function createPost(){
+    return {
+        meta: {
+            date: '',
+            modified: '',
+            tags: '',
+            category: '',
+            slug: '',
+            authors: '',
+            summary: '',
+            lang: '',
+            translation: ''
+        },
+        content: {
+            en: ""
+        },
+    };
+}
+
 /**
  * This performs a fetch (with GET) to the server.
  * 
@@ -21,6 +40,7 @@ const chubasquero = new Vue({
     delimiters: ["${", "}"],
     el: '#chubasquero',
     data: {
+        post: null,
         posts: [],
         loadingPosts: false,
         showPosts: false,
@@ -46,7 +66,7 @@ const chubasquero = new Vue({
         newPost: function () {
             this.cleanView();
             this.showEditor = true;
-            // TODO: create an emtpy post object
+            this.post = createPost();
             console.log("new post")
         },
         /**
