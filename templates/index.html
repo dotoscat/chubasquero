@@ -41,10 +41,15 @@
       <section id="editor" v-show="showEditor">
         
         <div class="mdl-layout mdl-js-layout">
-          <div class="mdl-layout__tab-bar">
-            <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
-            <a href="#meta" class="mdl-layout__tab">Meta</a>
-          </div>
+          <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+              <span class="mdl-layout-title">New post</span>
+            </div>
+            <div class="mdl-layout__tab-bar">
+              <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
+              <a href="#meta" class="mdl-layout__tab">Meta</a>
+            </div>
+          </header>
           <main class="mdl-layout__content">
             <section id="edit" class="mdl-layout__tab-panel is-active">
               <div class="mdl-grid">
