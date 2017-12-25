@@ -21,7 +21,7 @@ const chubasquero = new Vue({
   delimiters: ["${", "}"],
   el: '#chubasquero',
   data: {
-    post: null,
+    post: new Post(),
     posts: [],
     loadingPosts: false,
     showPosts: false,
@@ -31,6 +31,11 @@ const chubasquero = new Vue({
     serverResponse: {returncode: 0, stdout: "", stderr: ""}
   },
   methods: {
+    onChangeTitle: function (event) {
+      const title = event.target.value;
+      console.log("onTitleChange", title);
+      this.post.title = title;
+    },
     /**
      * Clean the current sections.
      * 
