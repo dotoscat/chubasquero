@@ -39,25 +39,36 @@
             </section>
             
             <section id="editor" v-show="showEditor">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="title"></input>
-                        <label class="mdl-textfield__label" for="title">Insert title</label>
+                
+                <div class="mdl-layout mdl-js-layout">
+                    <div class="mdl-layout__tab-bar">
+                        <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
+                        <a href="#meta" class="mdl-layout__tab">Meta</a>
                     </div>
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <button class="mdl-button mdl-js-button mdl-button--raised">Save</button>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <button class="mdl-button mdl-js-button mdl-button--raised">Meta</button>
-                    </div>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield post-content">
-                    <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
-                    </textarea>
-                    <label class="mdl-textfield__label" for="postContent">Write your content here</label>
+                    <main class="mdl-layout__content">
+                        <section id="edit" class="mdl-layout__tab-panel is-active">
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" id="title"></input>
+                                    <label class="mdl-textfield__label" for="title">Insert title</label>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised">Save</button>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
+                                </div>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield post-content">
+                                <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
+                                </textarea>
+                                <label class="mdl-textfield__label" for="postContent">Write your content here</label>
+                            </div>
+                        </section>
+                        <section id="meta" class="mdl-layout__tab-panel">
+                            <p>Meta here</p>
+                        </section>
+                    </main>
                 </div>
             </section>
             
