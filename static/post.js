@@ -9,10 +9,11 @@ class Translation {
 
 class Post {
   constructor() {
+    const now = new Date();
     this._title = '';
     this.meta = {
       slug: '',
-      date: '',// TODO: set current date
+      date: Post._get_now(),
       modified: null,
       tags: [],
       category: [],
@@ -21,6 +22,11 @@ class Post {
     };
     this.content = '';
     this.translations = new Map();
+  }
+  
+  static _get_now () {
+    const now = new Date();
+    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate() + 1} ${now.getHours()}:${now.getMinutes()}`;
   }
   
   get title () {
