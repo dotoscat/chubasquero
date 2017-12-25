@@ -17,7 +17,8 @@ app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
 def index():
-    return flask.render_template("index.html", **{"server": URL})
+    return flask.render_template("index.html"
+        , **{"server": URL, "defaultLang": pelicanconf.DEFAULT_LANG})
 
 @app.route("/posts", methods=["GET"])
 def get_posts():
