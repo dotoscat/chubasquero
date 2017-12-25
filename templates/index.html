@@ -41,7 +41,7 @@
       
       <section id="editor" v-show="showEditor">
         
-        <div class="mdl-layout mdl-js-layout">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
               <span class="mdl-layout-title">New post</span>
@@ -65,13 +65,7 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
                 </div>
               </div>
-              <!--
-                  <div class="mdl-tabs mdl-js-tabs">
-                    <div class="mdl-tabs__tab-bar">
-                      <a href="#" class="mdl-tabs_tab is-active">Hola</a>
-                    </div>
-                  </div>
-              -->
+
               <div class="mdl-textfield mdl-js-textfield post-content">
                 <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
                 </textarea>
