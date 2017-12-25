@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="material.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="chubasquero.css">
-        <script src="material.js"></script>
-        <script src="vue.js"></script>
-        <title>Pelican chubasquero</title>
-    </head>
-    <body>
-    
-    <script>
-        const CHUBASQUERO_SERVER = "{{server}}";
-    </script>
-    
-    <div id="chubasquero" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout__title">Chubasquero</span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="#" v-on:click="newPost()">New post</a>
-          <a class="mdl-navigation__link" href="#" v-on:click="managePosts()">Posts</a>
-          <a class="mdl-navigation__link" href="#" v-on:click="generateSite()">Generate site</a>
-          <a class="mdl-navigation__link" href="#" v-on:click="previewSite()">Preview</a>
-        </nav>
-      </div>
-      <main class="mdl-layout__content">
-        <div id="contenido">
-            
-            <section id="posts" v-show="showPosts">
-                <div id="progressPosts" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": loadingPosts}'></div>
-                <ul class="mdl-list">
-                    <li class="mdl-list__item" v-for="post in posts">
-                        <span class="mdl-list__item-primary-content">${ post }</span>
-                    </li>
-                </ul>
-            </section>
-            
-            <section id="editor" v-show="showEditor">
-                
-                <div class="mdl-layout mdl-js-layout">
-                    <div class="mdl-layout__tab-bar">
-                        <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
-                        <a href="#meta" class="mdl-layout__tab">Meta</a>
-                    </div>
-                    <main class="mdl-layout__content">
-                        <section id="edit" class="mdl-layout__tab-panel is-active">
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" type="text" id="title"></input>
-                                    <label class="mdl-textfield__label" for="title">Insert title</label>
-                                </div>
-                                <div class="mdl-cell mdl-cell--2-col">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised">Save</button>
-                                </div>
-                                <div class="mdl-cell mdl-cell--2-col">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
-                                </div>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield post-content">
-                                <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
-                                </textarea>
-                                <label class="mdl-textfield__label" for="postContent">Write your content here</label>
-                            </div>
-                        </section>
-                        <section id="meta" class="mdl-layout__tab-panel">
-                            <p>Meta here</p>
-                        </section>
-                    </main>
-                </div>
-            </section>
-            
-            <section id="generate-site" v-show="showGenerateSite">
-                <h4>Generating site</h4>
-                <div id="progressSite" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": generatingSite}'></div>
-                <p>${serverResponse.stdout}</p>
-                <p style="color: red;">${serverResponse.stderr}</p>
-            </section>
-            
-        </div>
-      </main>
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="material.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="chubasquero.css">
+    <script src="material.js"></script>
+    <script src="vue.js"></script>
+    <title>Pelican chubasquero</title>
+  </head>
+  <body>
+  
+  <script>
+    const CHUBASQUERO_SERVER = "{{server}}";
+  </script>
+  
+  <div id="chubasquero" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+    <span class="mdl-layout__title">Chubasquero</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="#" v-on:click="newPost()">New post</a>
+      <a class="mdl-navigation__link" href="#" v-on:click="managePosts()">Posts</a>
+      <a class="mdl-navigation__link" href="#" v-on:click="generateSite()">Generate site</a>
+      <a class="mdl-navigation__link" href="#" v-on:click="previewSite()">Preview</a>
+    </nav>
     </div>
+    <main class="mdl-layout__content">
+    <div id="contenido">
+      
+      <section id="posts" v-show="showPosts">
+        <div id="progressPosts" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": loadingPosts}'></div>
+        <ul class="mdl-list">
+          <li class="mdl-list__item" v-for="post in posts">
+            <span class="mdl-list__item-primary-content">${ post }</span>
+          </li>
+        </ul>
+      </section>
+      
+      <section id="editor" v-show="showEditor">
+        
+        <div class="mdl-layout mdl-js-layout">
+          <div class="mdl-layout__tab-bar">
+            <a href="#edit" class="mdl-layout__tab is-active">Edit</a>
+            <a href="#meta" class="mdl-layout__tab">Meta</a>
+          </div>
+          <main class="mdl-layout__content">
+            <section id="edit" class="mdl-layout__tab-panel is-active">
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="title"></input>
+                  <label class="mdl-textfield__label" for="title">Insert title</label>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                  <button class="mdl-button mdl-js-button mdl-button--raised">Save</button>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                  <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
+                </div>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield post-content">
+                <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
+                </textarea>
+                <label class="mdl-textfield__label" for="postContent">Write your content here</label>
+              </div>
+            </section>
+            <section id="meta" class="mdl-layout__tab-panel">
+              <p>Meta here</p>
+            </section>
+          </main>
+        </div>
+      </section>
+      
+      <section id="generate-site" v-show="showGenerateSite">
+        <h4>Generating site</h4>
+        <div id="progressSite" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": generatingSite}'></div>
+        <p>${serverResponse.stdout}</p>
+        <p style="color: red;">${serverResponse.stderr}</p>
+      </section>
+      
+    </div>
+    </main>
+  </div>
 
-    <script src="chubasquero.js"></script>
+  <script src="chubasquero.js"></script>
 
-    </body>
+  </body>
 </html>
