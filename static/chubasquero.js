@@ -28,9 +28,34 @@ const chubasquero = new Vue({
     showEditor: false,
     showGenerateSite: false,
     generatingSite: false,
-    serverResponse: {returncode: 0, stdout: "", stderr: ""}
+    serverResponse: {returncode: 0, stdout: "", stderr: ""},
+    autosaveInterval: null,
+    postTextarea: null
+  },
+  mounted: function () {
+    this.postTextarea = document.getElementById("post-textarea");
+    console.log("post textarea", this.postTextarea);
   },
   methods: {
+    /**
+     * Each a few seconds the contents of the textarea is saved
+     * in the post model 
+     */
+    startAutosave: function () {
+      this.autosaveInterval = setInterval(() => {
+        this.post.content = this.postTextarea.value;
+      }, 5000);
+    },
+    /**
+     * Stop autosaving the post textarea
+     */
+    stopAutosave: function () {
+      clearInterval(this.autosaveInterval);
+      this.autosaveInterval = null;
+    },
+    /**
+     * @param {event} event On change event
+     */
     onChangeTitle: function (event) {
       const title = event.target.value;
       console.log("onTitleChange", title);
@@ -42,9 +67,10 @@ const chubasquero = new Vue({
      * Actually what this does is set all the show group to false
      */
     cleanView: function (){
-      this.showPosts = false,
-      this.showEditor = false,
-      this.showGenerateSite = false
+      this.showPosts = false;
+      this.showEditor = false;
+      this.showGenerateSite = false;
+      this.stopAutosave();
     },
     /**
      * Prepare content to edit a post
@@ -53,6 +79,7 @@ const chubasquero = new Vue({
       this.cleanView();
       this.showEditor = true;
       this.$set(this, "post", new Post());
+      this.startAutosave();
       console.log("new post")
     },
     /**
