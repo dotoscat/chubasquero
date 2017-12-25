@@ -16,7 +16,7 @@
     const CHUBASQUERO_SERVER = "{{server}}";
     const DEFAULT_LANG = "{{defaultLang}}";
   </script>
-  
+  <!--main layout-->
   <div id="chubasquero" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <div class="mdl-layout__drawer">
     <span class="mdl-layout__title">Chubasquero</span>
@@ -27,9 +27,10 @@
       <a class="mdl-navigation__link" href="#" v-on:click="previewSite()">Preview</a>
     </nav>
     </div>
+    <!--contenido-->
     <main class="mdl-layout__content">
     <div id="contenido">
-      
+      <!--Show posts-->
       <section id="posts" v-show="showPosts">
         <div id="progressPosts" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": loadingPosts}'></div>
         <ul class="mdl-list">
@@ -38,9 +39,9 @@
           </li>
         </ul>
       </section>
-      
+      <!--Shot editor-->
       <section id="editor" v-show="showEditor">
-        
+        <!--editor layout-->
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -51,7 +52,9 @@
               <a href="#meta" class="mdl-layout__tab">Meta</a>
             </div>
           </header>
+          <!--editor content-->
           <main class="mdl-layout__content">
+            <!--post edition-->
             <section id="edit" class="mdl-layout__tab-panel is-active">
               <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield">
@@ -65,20 +68,21 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
                 </div>
               </div>
-
+              <!--(big) text area-->
               <div class="mdl-textfield mdl-js-textfield post-content">
                 <textarea class="mdl-textfield__input" type="text" rows="25" id="postContent">
                 </textarea>
                 <label class="mdl-textfield__label" for="postContent">Write your content here</label>
               </div>
             </section>
+            <!--post meta-->
             <section id="meta" class="mdl-layout__tab-panel">
               <p>Meta here</p>
             </section>
           </main>
         </div>
       </section>
-      
+      <!--Generate site page-->
       <section id="generate-site" v-show="showGenerateSite">
         <h4>Generating site</h4>
         <div id="progressSite" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": generatingSite}'></div>
