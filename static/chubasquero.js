@@ -1,24 +1,5 @@
 'use strict';
 
-function createPost(){
-  return {
-    meta: {
-      date: '',
-      modified: '',
-      tags: '',
-      category: '',
-      slug: '',
-      authors: '',
-      summary: '',
-      lang: '',
-      translation: ''
-    },
-    content: {
-      en: ""
-    },
-  };
-}
-
 /**
  * This performs a fetch (with GET) to the server.
  * 
@@ -66,7 +47,7 @@ const chubasquero = new Vue({
     newPost: function () {
       this.cleanView();
       this.showEditor = true;
-      this.post = createPost();
+      this.$set(this, "post", new Post());
       console.log("new post")
     },
     /**
