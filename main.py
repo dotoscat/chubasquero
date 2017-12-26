@@ -17,9 +17,30 @@ URL = "http://{}:{}".format(HOST, PORT)
 app = flask.Flask(__name__, static_url_path='')
 
 def save_post_locally(post):
-    filename = post.meta.slug
+    filename = post["meta"]["slug"]
+    title = post["_title"]
+    content = post["content"]
+    
+    post_body = ""
+    post_body += title + '\n'
+    post_body += '#'*len(title) + '\n\n'
+    for key in post["meta"]:
+        value = post["meta"][key]
+        if value is None: continue
+        if isinstance(value, str):
+            post_body += ":{}: {}\n".format(key, value)
+        elif isinstance(value, list):
+            post_body + = ":{}: ".format(key)
+            for i, element in enumerate(value):
+                if i == len(value):
+                    post_body += element
+                else:
+                    post_body += element + ', '
+    post_body += '\n\n'
+    post_body += content + '\n'
     
     print("save post", post)
+    print("post body", post_body)
 
 @app.route("/")
 def index():
