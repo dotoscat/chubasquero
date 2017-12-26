@@ -17,7 +17,7 @@ URL = "http://{}:{}".format(HOST, PORT)
 app = flask.Flask(__name__, static_url_path='')
 
 def save_post_locally(post):
-    filename = post["meta"]["slug"]
+
     title = post["_title"]
     content = post["content"]
     
@@ -30,17 +30,25 @@ def save_post_locally(post):
         if isinstance(value, str):
             post_body += ":{}: {}\n".format(key, value)
         elif isinstance(value, list):
-            post_body + = ":{}: ".format(key)
+            post_body += ":{}: ".format(key)
             for i, element in enumerate(value):
                 if i == len(value):
                     post_body += element
                 else:
-                    post_body += element + ', '
+                    post_body += element + ", "
+            post_body += '\n'
     post_body += '\n\n'
     post_body += content + '\n'
     
     print("save post", post)
     print("post body", post_body)
+    
+    filename = post["meta"]["slug"] + ".rst"
+    file_path = os.path.join(os.path.abspath(pelicanconf.PATH), filename)
+    
+    with open(file_path, "w") as post_file:
+        post_file.write(post_body)
+    
 
 @app.route("/")
 def index():
