@@ -1,3 +1,4 @@
+import os.path
 import subprocess
 import json
 import webbrowser
@@ -15,6 +16,11 @@ URL = "http://{}:{}".format(HOST, PORT)
 
 app = flask.Flask(__name__, static_url_path='')
 
+def save_post_locally(post):
+    filename = post.meta.slug
+    
+    print("save post", post)
+
 @app.route("/")
 def index():
     return flask.render_template("index.html"
@@ -25,6 +31,14 @@ def get_posts():
     posts = json.dumps(["Uno", "Dos", "Y tres...", "..."])
     return posts
 
+@app.route("/post", methods=["POST"])
+def save_post():
+    print("headers", flask.request.headers)
+    print("is json", flask.request.is_json)
+    post = flask.request.get_json(cache=False)
+    save_post_locally(post)
+    return json.dumps({"returncode": 0})
+    
 @app.route("/generate-site")
 def generate_site():
     completed = subprocess.run("pelican", stdout=subprocess.PIPE

@@ -37,6 +37,21 @@ const chubasquero = new Vue({
     console.log("post textarea", this.postTextarea);
   },
   methods: {
+    savePost: function () {
+      const endpoint = CHUBASQUERO_SERVER + '/post';
+      this.post.content = this.postTextarea.value;
+      const sendObject = JSON.stringify(this.post);
+      const fetchInit = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: sendObject
+      };
+      fetch(endpoint, fetchInit).then((response) => {
+          console.log("send post done right");
+      }, (error) => console.log("post post error"));
+    },
     /**
      * Each a few seconds the contents of the textarea is saved
      * in the post model 
