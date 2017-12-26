@@ -30,6 +30,7 @@ def save_post_locally(post):
         if isinstance(value, str):
             post_body += ":{}: {}\n".format(key, value)
         elif isinstance(value, list):
+            if not value: continue
             post_body += ":{}: ".format(key)
             for i, element in enumerate(value):
                 if i == len(value):
