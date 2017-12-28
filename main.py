@@ -20,7 +20,7 @@ def save_post_locally(post):
     """Saves the post object to disk.
     
     Parameters:
-        post (object): Post to save to disk.
+        post (dict): Post to save to disk.
     """
     title = post["_title"]
     content = post["content"]
