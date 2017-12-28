@@ -42,6 +42,12 @@ const chubasquero = new Vue({
      * Sends the content of the post as json to the server
      */
     savePost: function () {
+      if (this.post.title.length === 0){
+        this.savePostNotification.MaterialSnackbar.showSnackbar(
+          {message: 'Title is empty!'}
+        );
+        return;
+      }
       const endpoint = CHUBASQUERO_SERVER + '/post';
       this.post.content = this.postTextarea.value;
       const sendObject = JSON.stringify(this.post);
@@ -55,7 +61,8 @@ const chubasquero = new Vue({
       const sendPostNotification = document.getElementB
       fetch(endpoint, fetchInit).then((response) => {
           // TODO: Display on screen discretly the result of the operation
-          this.savePostNotification.MaterialSnackbar.showSnackbar({message: 'Saved'});
+          const message = '"' + this.post.title + '" is saved.';
+          this.savePostNotification.MaterialSnackbar.showSnackbar({message: message});
       }, (error) => console.log("post post error"));
     },
     /**
