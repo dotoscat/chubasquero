@@ -37,6 +37,9 @@ const chubasquero = new Vue({
     console.log("post textarea", this.postTextarea);
   },
   methods: {
+    /**
+     * Sends the content of the post as json to the server
+     */
     savePost: function () {
       const endpoint = CHUBASQUERO_SERVER + '/post';
       this.post.content = this.postTextarea.value;
@@ -49,6 +52,7 @@ const chubasquero = new Vue({
         body: sendObject
       };
       fetch(endpoint, fetchInit).then((response) => {
+          // TODO: Display on screen discretly the result of the operation
           console.log("send post done right");
       }, (error) => console.log("post post error"));
     },

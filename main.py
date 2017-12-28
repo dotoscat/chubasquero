@@ -17,7 +17,11 @@ URL = "http://{}:{}".format(HOST, PORT)
 app = flask.Flask(__name__, static_url_path='')
 
 def save_post_locally(post):
-
+    """Saves the post object to disk.
+    
+    Parameters:
+        post (object): Post to save to disk.
+    """
     title = post["_title"]
     content = post["content"]
     
@@ -49,10 +53,15 @@ def save_post_locally(post):
     
     with open(file_path, "w") as post_file:
         post_file.write(post_body)
-    
 
 @app.route("/")
 def index():
+    """Returns to the user the Chubasquero frontend.
+    
+    The index shall be a jinja2 template. You pass to that template the
+    URL of the server with its ip and port; and the default lang from
+    pelicanconf defined from the user.
+    """
     return flask.render_template("index.html"
         , **{"server": URL, "defaultLang": pelicanconf.DEFAULT_LANG})
 
@@ -63,6 +72,7 @@ def get_posts():
 
 @app.route("/post", methods=["POST"])
 def save_post():
+    """Transforms the request send from the frontend to an object."""
     print("headers", flask.request.headers)
     print("is json", flask.request.is_json)
     post = flask.request.get_json(cache=False)
@@ -71,6 +81,7 @@ def save_post():
     
 @app.route("/generate-site")
 def generate_site():
+    """Generate the site."""
     completed = subprocess.run("pelican", stdout=subprocess.PIPE
         , stderr=subprocess.PIPE)
     response = {"returncode": completed.returncode

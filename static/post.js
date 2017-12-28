@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * A particular translation for a post.
+ * @class
+ */
 class Translation {
   constructor() {
     this.translation = true;
@@ -7,6 +11,10 @@ class Translation {
   }
 }
 
+/**
+ * This is a post.
+ * @class
+ */
 class Post {
   constructor() {
     const now = new Date();
