@@ -64,15 +64,16 @@
                 <div class="mdl-cell mdl-cell--2-col">
                   <button class="mdl-button mdl-js-button mdl-button--raised" v-on:click="savePost">Save</button>
                 </div>
-                <div class="mdl-cell mdl-cell--2-col">
-                  <button class="mdl-button mdl-js-button mdl-button--raised">Preview</button>
-                </div>
               </div>
               <!--(big) text area-->
               <div class="mdl-textfield mdl-js-textfield post-content">
                 <textarea class="mdl-textfield__input" type="text" rows="25" id="post-textarea">
                 </textarea>
                 <label class="mdl-textfield__label" for="post-textarea">Write your content here</label>
+              </div>
+              <div id="savepost-notification" class="mdl-snackbar mdl-js-snackbar">
+                  <div class="mdl-snackbar__text"></div>
+                  <button type="button" class="mdl-snackbar__action"></button>
               </div>
             </section>
             <!--post meta-->

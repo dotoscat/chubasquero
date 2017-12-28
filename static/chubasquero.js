@@ -30,11 +30,12 @@ const chubasquero = new Vue({
     generatingSite: false,
     serverResponse: {returncode: 0, stdout: "", stderr: ""},
     autosaveInterval: null,
-    postTextarea: null
+    postTextarea: null,
+    savePostNotification: null
   },
   mounted: function () {
     this.postTextarea = document.getElementById("post-textarea");
-    console.log("post textarea", this.postTextarea);
+    this.savePostNotification = document.getElementById("savepost-notification");
   },
   methods: {
     /**
@@ -51,9 +52,10 @@ const chubasquero = new Vue({
         },
         body: sendObject
       };
+      const sendPostNotification = document.getElementB
       fetch(endpoint, fetchInit).then((response) => {
           // TODO: Display on screen discretly the result of the operation
-          console.log("send post done right");
+          this.savePostNotification.MaterialSnackbar.showSnackbar({message: 'Saved'});
       }, (error) => console.log("post post error"));
     },
     /**
