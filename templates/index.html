@@ -33,11 +33,19 @@
       <!--Show posts-->
       <section id="posts" v-show="showPosts">
         <div id="progressPosts" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": loadingPosts}'></div>
-        <ul class="mdl-list">
-          <li class="mdl-list__item" v-for="post in posts">
-            <span class="mdl-list__item-primary-content">${ post }</span>
-          </li>
-        </ul>
+        <!--post table-->
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="post in posts">
+              <td class="mdl-data-table__cell--non-numeric">${post}</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
       <!--Shot editor-->
       <section id="editor" v-show="showEditor">

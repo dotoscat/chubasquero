@@ -13,8 +13,15 @@ except ImportError:
 HOST = "127.0.0.1"
 PORT = 8080
 URL = "http://{}:{}".format(HOST, PORT)
+CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
 
 app = flask.Flask(__name__, static_url_path='')
+
+def get_post_list():
+    """Returns a post list stored on :obj:`pelicanconf.PATH`."""
+    # TODO: create a function to extract metadata properly
+    posts = [post.name for post in os.scandir(CONTENT_PATH)]
+    return posts
 
 def save_post_locally(post):
     """Saves the post object to disk.
@@ -49,7 +56,7 @@ def save_post_locally(post):
     print("post body", post_body)
     
     filename = post["meta"]["slug"] + ".rst"
-    file_path = os.path.join(os.path.abspath(pelicanconf.PATH), filename)
+    file_path = os.path.join(CONTENT_PATH, filename)
     
     with open(file_path, "w") as post_file:
         post_file.write(post_body)
@@ -67,7 +74,7 @@ def index():
 
 @app.route("/posts", methods=["GET"])
 def get_posts():
-    posts = json.dumps(["Uno", "Dos", "Y tres...", "..."])
+    posts = json.dumps(get_post_list())
     return posts
 
 @app.route("/post", methods=["POST"])
