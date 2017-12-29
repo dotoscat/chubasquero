@@ -96,7 +96,8 @@ def generate_site():
         , "stderr": completed.stderr.decode()}
     return json.dumps(response)
 
-with make_server(HOST, PORT, app) as httpd:
-    print("open", URL)
-    webbrowser.open(URL)
-    httpd.serve_forever()
+if __name__ == "__main__":
+    with make_server(HOST, PORT, app) as httpd:
+        print("open", URL)
+        webbrowser.open(URL)
+        httpd.serve_forever()
