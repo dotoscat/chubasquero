@@ -4,6 +4,9 @@ import json
 import webbrowser
 from wsgiref.simple_server import make_server
 import flask
+from docutils.core import publish_doctree
+from docutils import nodes
+
 try:
     import pelicanconf
 except ImportError:
@@ -17,10 +20,36 @@ CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
 
 app = flask.Flask(__name__, static_url_path='')
 
+def get_metadata_from(post_path):
+    """Returns metadata post as a dict.
+    
+    Parameters:
+        post_path (string): Post path
+    
+    Returns:
+        (dict|None): meta info from the post. None if metadata is not found.
+    """
+    metadata = {}
+    with open(post_path) as post_file:
+        post_tree = publish_doctree(post_file.read())
+        docinfo = post_tree[1]
+        if not isinstance(docinfo, nodes.docinfo):
+            return None
+        for elem in docinfo:
+            if isinstance(elem, nodes.date):
+                metadata["date"] = elem.astext()
+            else:
+                key = elem[0].astext()
+                if key in ("authors", "tags", "category"):
+                    value = [v.strip() for v in elem[1].astext().split(',')]
+                else:
+                    value = elem[1].astext()
+                metadata[key] = value
+    return metadata
+    
 def get_post_list():
     """Returns a post list stored on :obj:`pelicanconf.PATH`."""
-    # TODO: create a function to extract metadata properly
-    posts = [post.name for post in os.scandir(CONTENT_PATH)]
+    posts = [get_metadata_from(post.path) for post in os.scandir(CONTENT_PATH)]
     return posts
 
 def save_post_locally(post):
