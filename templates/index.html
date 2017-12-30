@@ -38,11 +38,18 @@
           <thead>
             <tr>
               <th class="mdl-data-table__cell--non-numeric">Name</th>
+              <th class="mdl-data-table__cell--non-numeric">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="post in posts">
               <td class="mdl-data-table__cell--non-numeric">${post.slug}</td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <!-- What to do with this post -->
+                <button class="mdl-button mdl-js-button mdl-button--colored">
+                  Edit
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
