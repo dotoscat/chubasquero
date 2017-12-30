@@ -42,11 +42,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="post in posts">
+            <tr v-for="post in posts" :key="post.slug">
               <td class="mdl-data-table__cell--non-numeric">${post.slug}</td>
               <td class="mdl-data-table__cell--non-numeric">
                 <!-- What to do with this post -->
-                <button class="mdl-button mdl-js-button mdl-button--colored">
+                <button class="mdl-button mdl-js-button mdl-button--colored" v-on:click="editPost(post)">
                   Edit
                 </button>
               </td>
