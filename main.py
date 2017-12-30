@@ -114,7 +114,13 @@ def save_post():
     post = flask.request.get_json(cache=False)
     save_post_locally(post)
     return json.dumps({"returncode": 0})
-    
+
+@app.route("/post/<slug>", methods=["GET"])
+def get_post(slug):
+    filename = slug + ".rst";
+    filepath = os.path.join(CONTENT_PATH, filename);
+    return json.dumps({"serverResponse": "return {} asked from the client".format(filepath)});
+
 @app.route("/generate-site")
 def generate_site():
     """Generate the site."""

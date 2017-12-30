@@ -68,7 +68,10 @@ const chubasquero = new Vue({
       this.cleanView();
       this.showEditor = true;
       // TODO: ask the server for the content based on post.slug and create a Post with it
-      this.$set(this, "post", new Post());
+      requestGetToServer('/post/' + post.slug).then((response) => {
+        console.log('RequestGetPost', response);
+      }, (error) => console.error("RequestGetPost " + post.slug, error));
+      //this.$set(this, 'post', new Post());
       this.startAutosave();
       console.log("Edit post", post);
     },
@@ -82,18 +85,8 @@ const chubasquero = new Vue({
         );
         return;
       }
-      const endpoint = CHUBASQUERO_SERVER + '/post';
       this.post.content = this.postTextarea.value;
-      const sendObject = JSON.stringify(this.post);
-      const fetchInit = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: sendObject
-      };
-      fetch(endpoint, fetchInit).then((response) => {
-          // TODO: Display on screen discretly the result of the operation
+      requestPostToServer('/post', this.post).then((response) => {
           const message = '"' + this.post.title + '" is saved.';
           this.savePostNotification.MaterialSnackbar.showSnackbar({message: message});
       }, (error) => console.log("post post error"));
