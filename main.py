@@ -34,17 +34,15 @@ def save_post():
     print("headers", flask.request.headers)
     print("is json", flask.request.is_json)
     post = flask.request.get_json(cache=False)
-    save_post_locally(post)
+    chubasquero.save_post_locally(post)
     return json.dumps({"returncode": 0})
 
 @app.route("/post/<slug>", methods=["GET"])
 def get_post(slug):
     """Returns a JSON object of the post to be used by javascript Post class."""
     filename = slug + ".rst";
-    filepath = os.path.join(chubasquero.CONTENT_PATH, filename);
-    # TODO: Returns post as Post class for the frontend
-    
-    return json.dumps({"serverResponse": "return {} asked from the client".format(filepath)});
+    filepath = os.path.join(chubasquero.CONTENT_PATH, filename)
+    return json.dumps(chubasquero.get_post_data(filepath))
 
 @app.route("/generate-site")
 def generate_site():

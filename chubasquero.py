@@ -1,3 +1,4 @@
+import re
 import os.path
 from docutils.core import publish_doctree
 from docutils import nodes
@@ -10,8 +11,18 @@ except ImportError:
 
 CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
 
+def get_post_data(post_path):
+    """Returns a dict of the content of the post."""
+    with open(post_path) as post_file:
+        post_text = post_file.read()
+        post_doctree = publish_doctree(post_text)
+        meta = get_metadata_from_doctree(post_doctree)
+        post_content = re.sub(":\w+:.*?\n", '', post_text)
+        post = {"meta": meta, "content": post_content}
+        return post
+
 def get_metadata_from_file(post_file):
-    """Get the just the metadata from the post file."""
+    """Get just the metadata from the post file."""
     post_doctree = publish_doctree(post_file.read())
     return get_metadata_from_doctree(post_doctree)
 
@@ -23,6 +34,10 @@ def get_metadata_from_doctree(post_tree):
     
     Returns:
         (dict|None): meta info from the post. None if metadata is not found.
+        
+    Todo:
+        This function assumes that the docinfo tag is the second child of the
+        doctree. Extract tags from docinfo anywere of the doctree.
     """
     metadata = {}
     docinfo = post_tree[1]
