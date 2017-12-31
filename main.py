@@ -20,37 +20,53 @@ CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
 
 app = flask.Flask(__name__, static_url_path='')
 
-def get_metadata_from(post_path):
+def get_metadata_from_file(post_file):
+    """Get the just the metadata from the post file."""
+    post_doctree = publish_doctree(post_file.read())
+    return get_metadata_from_doctree(post_doctree)
+
+def get_metadata_from_doctree(post_tree):
     """Returns metadata post as a dict.
     
     Parameters:
-        post_path (string): Post path
+        post_tree (:obj:`docutils.nodes.document`): Post tree
     
     Returns:
         (dict|None): meta info from the post. None if metadata is not found.
     """
     metadata = {}
-    with open(post_path) as post_file:
-        post_tree = publish_doctree(post_file.read())
-        docinfo = post_tree[1]
-        if not isinstance(docinfo, nodes.docinfo):
-            return None
-        for elem in docinfo:
-            if isinstance(elem, nodes.date):
-                metadata["date"] = elem.astext()
+    docinfo = post_tree[1]
+    if not isinstance(docinfo, nodes.docinfo):
+        return None
+    for elem in docinfo:
+        if isinstance(elem, nodes.date):
+            metadata["date"] = elem.astext()
+        else:
+            key = elem[0].astext()
+            if key in ("authors", "tags", "category"):
+                value = [v.strip() for v in elem[1].astext().split(',')]
             else:
-                key = elem[0].astext()
-                if key in ("authors", "tags", "category"):
-                    value = [v.strip() for v in elem[1].astext().split(',')]
-                else:
-                    value = elem[1].astext()
-                metadata[key] = value
+                value = elem[1].astext()
+            metadata[key] = value
     return metadata
+
+def do_with_file(path, action):
+    """Do some *action* with an file opened with path.
     
+    Parameters:
+        path (str): Path of the file
+        action (callable): A callable with a file descriptor as first argument.
+    
+    Returns:
+        The return value of *action*
+    """
+    with open(path) as this_file:
+        return action(this_file)
+
 def get_post_list():
     """Returns a post list stored on :obj:`pelicanconf.PATH`."""
-    posts = [get_metadata_from(post.path) for post in os.scandir(CONTENT_PATH)]
-    return posts
+    return [do_with_file(post.path, get_metadata_from_file)
+        for post in os.scandir(CONTENT_PATH)]
 
 def save_post_locally(post):
     """Saves the post object to disk.
@@ -117,8 +133,11 @@ def save_post():
 
 @app.route("/post/<slug>", methods=["GET"])
 def get_post(slug):
+    """Returns a JSON object of the post to be used by javascript Post class."""
     filename = slug + ".rst";
     filepath = os.path.join(CONTENT_PATH, filename);
+    # TODO: Returns post as Post class for the frontend
+    
     return json.dumps({"serverResponse": "return {} asked from the client".format(filepath)});
 
 @app.route("/generate-site")
