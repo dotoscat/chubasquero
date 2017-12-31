@@ -26,7 +26,7 @@ class Post {
         : '';
     this.meta = {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
-      //date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
+      date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
       //modified: null,
       tags: [],
       category: [],
@@ -39,7 +39,7 @@ class Post {
   
   static _get_now () {
     const now = new Date();
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+    return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
   }
   
   get title () {
