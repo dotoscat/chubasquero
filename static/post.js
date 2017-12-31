@@ -16,19 +16,21 @@ class Translation {
  * @class
  */
 class Post {
-  constructor() {
-    const now = new Date();
-    this._title = '';
+  constructor(jsonObject) {
+    const thereisJsonObject = typeof jsonObject === 'object';
+    this._title = thereisJsonObject
+        ? jsonObject.meta.slug.replace('-', ' ')
+        : '';
     this.meta = {
-      slug: '',
-      date: Post._get_now(),
+      slug: thereisJsonObject ? jsonObject.meta.slug : '',
+      date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
       modified: null,
       tags: [],
       category: [],
       authors: [],
       summary: '',
     };
-    this.content = '';
+    this.content = thereisJsonObject ? jsonObject.content : '';
     this.translations = new Map();
   }
   

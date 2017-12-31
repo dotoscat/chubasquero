@@ -67,12 +67,13 @@ const chubasquero = new Vue({
       this.isNewPost = false;
       this.cleanView();
       this.showEditor = true;
-      // TODO: ask the server for the content based on post.slug and create a Post with it
       requestGetToServer('/post/' + post.slug).then((response) => {
         console.log('RequestGetPost', response);
+        this.postTextarea.value = response.content;
+        
+        this.$set(this, 'post', new Post(response));
+        this.startAutosave();
       }, (error) => console.error("RequestGetPost " + post.slug, error));
-      //this.$set(this, 'post', new Post());
-      this.startAutosave();
       console.log("Edit post", post);
     },
     /**
