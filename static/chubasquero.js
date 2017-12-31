@@ -63,6 +63,18 @@ const chubasquero = new Vue({
     this.savePostNotification = document.getElementById("savepost-notification");
   },
   methods: {
+    /**
+     * Clean post editor view.
+     */
+    cleanPostEditor: function () {
+      this.$refs.title.value = "";
+      this.$refs.postTextarea.value = "";
+    },
+    /**
+     * Request to the server the content of post, which is only metadata.
+     * 
+     * @param {object} post
+     */
     editPost: function (post) {
       this.isNewPost = false;
       this.cleanView();
@@ -133,6 +145,7 @@ const chubasquero = new Vue({
     newPost: function () {
       this.isNewPost = true;
       this.cleanView();
+      this.cleanPostEditor();
       this.showEditor = true;
       this.$set(this, "post", new Post());
       this.startAutosave();
