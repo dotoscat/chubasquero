@@ -14,6 +14,9 @@ class Translation {
 /**
  * This is a post.
  * @class
+ * 
+ * @todo Pelican complains about the date format.
+ * @todo Title is inside content. Is better use the slug.
  */
 class Post {
   constructor(jsonObject) {
@@ -23,12 +26,12 @@ class Post {
         : '';
     this.meta = {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
-      date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
-      modified: null,
+      //date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
+      //modified: null,
       tags: [],
       category: [],
       authors: [],
-      summary: '',
+      //summary: '',
     };
     this.content = thereisJsonObject ? jsonObject.content : '';
     this.translations = new Map();
