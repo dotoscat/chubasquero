@@ -7,6 +7,11 @@
 
 #post-textarea {
     font-family: monospace;
+    margin-left: 1em;
+}
+
+#post-textarea + label {
+    margin-left: 1em;
 }
 
 div.progressbar {
