@@ -36,7 +36,7 @@ class Post {
   
   static _get_now () {
     const now = new Date();
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate() + 1} ${now.getHours()}:${now.getMinutes()}`;
+    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
   }
   
   get title () {

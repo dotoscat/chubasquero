@@ -65,7 +65,7 @@ def do_with_file(path, action):
     Returns:
         The return value of *action*
     """
-    with open(path) as this_file:
+    with open(path, encoding="utf8") as this_file:
         return action(this_file)
 
 def get_post_list():
@@ -108,5 +108,5 @@ def save_post_locally(post):
     filename = post["meta"]["slug"] + ".rst"
     file_path = os.path.join(CONTENT_PATH, filename)
     
-    with open(file_path, "w") as post_file:
+    with open(file_path, "w", encoding="utf8") as post_file:
         post_file.write(post_body)
