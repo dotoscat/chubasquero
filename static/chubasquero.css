@@ -5,6 +5,10 @@
     margin-top: 0em;
 }
 
+#post-textarea {
+    font-family: monospace;
+}
+
 div.progressbar {
     margin-left: auto;
     margin-right: auto;
