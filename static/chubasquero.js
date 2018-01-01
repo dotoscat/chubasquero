@@ -53,7 +53,7 @@ const chubasquero = new Vue({
     showEditor: false,
     showGenerateSite: false,
     generatingSite: false,
-    serverResponse: {returncode: 0, stdout: "", stderr: ""},
+    serverResponse: {returncode: -1, stdout: '', stderr: ''},
     autosaveInterval: null,
     postTextarea: null,
     savePostNotification: null
@@ -177,6 +177,9 @@ const chubasquero = new Vue({
       this.cleanView();
       this.showGenerateSite = true;
       this.generatingSite = true;
+      this.serverResponse.stdout = '';
+      this.serverResponse.stderr = '';
+      this.serverResponse.returncode = -1;
       requestGetToServer("/generate-site")
       .then((response) => {
         console.log("response", response);
