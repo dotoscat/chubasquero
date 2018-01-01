@@ -13,6 +13,11 @@ HOST = "127.0.0.1"
 PORT = 8080
 URL = "http://{}:{}".format(HOST, PORT)
 
+PREVIEW_PORT = 8000
+PREVIEW_URL = "http://{}:{}".format(HOST, PREVIEW_PORT)
+
+preview_server = subprocess.Popen(['python', '-m', 'http.server', str(PREVIEW_PORT)]
+    , cwd="output")
 app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
