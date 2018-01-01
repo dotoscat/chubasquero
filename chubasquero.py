@@ -94,7 +94,6 @@ def save_post_locally(post):
                 else:
                     post_body += element + ", "
             post_body += '\n'
-    post_body += '\n'
     post_body += post["content"] + '\n'
     
     print("save post", post)
