@@ -92,15 +92,15 @@ const chubasquero = new Vue({
      * Sends the content of the post as json to the server
      */
     savePost: function () {
-      if (this.post.title.length === 0){
+      if (this.post.meta.slug.length === 0){
         this.savePostNotification.MaterialSnackbar.showSnackbar(
-          {message: 'Title is empty!'}
+          {message: 'Slug is empty!'}
         );
         return;
       }
       this.post.content = this.postTextarea.value;
       requestPostToServer('/post', this.post).then((response) => {
-          const message = '"' + this.post.title + '" is saved.';
+          const message = '"' + this.post.meta.slug + '" is saved.';
           this.savePostNotification.MaterialSnackbar.showSnackbar({message: message});
       }, (error) => console.log("post post error"));
     },
@@ -124,7 +124,7 @@ const chubasquero = new Vue({
      * @param {event} event On change event
      */
     onChangeSlug: function (event) {
-      const slug = event.target.value.replace(' ', '-');
+      const slug = event.target.value.replace(/\s/g, '-');
       event.target.value = slug;
       console.log("onChangeSlug", slug);
       this.post.meta.slug = slug;

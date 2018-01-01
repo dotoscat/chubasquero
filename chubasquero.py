@@ -36,11 +36,11 @@ def get_metadata_from_doctree(post_tree):
         (dict|None): meta info from the post. None if metadata is not found.
         
     Todo:
-        This function assumes that the docinfo tag is the second child of the
+        This function assumes that the docinfo tag is the first child of the
         doctree. Extract tags from docinfo anywere of the doctree.
     """
     metadata = {}
-    docinfo = post_tree[1]
+    docinfo = post_tree[0]
     if not isinstance(docinfo, nodes.docinfo):
         return None
     for elem in docinfo:
@@ -79,12 +79,7 @@ def save_post_locally(post):
     Parameters:
         post (dict): Post to save to disk.
     """
-    title = post["_title"]
-    content = post["content"]
-    
     post_body = ""
-    post_body += title + '\n'
-    post_body += '#'*len(title) + '\n\n'
     for key in post["meta"]:
         value = post["meta"][key]
         if value is None: continue
@@ -99,8 +94,8 @@ def save_post_locally(post):
                 else:
                     post_body += element + ", "
             post_body += '\n'
-    post_body += '\n\n'
-    post_body += content + '\n'
+    post_body += '\n'
+    post_body += post["content"] + '\n'
     
     print("save post", post)
     print("post body", post_body)
