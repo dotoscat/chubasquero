@@ -14,16 +14,12 @@ class Translation {
 /**
  * This is a post.
  * @class
- * 
- * @todo Pelican complains about the date format.
+ *
  * @todo Title is inside content. Is better use the slug.
  */
 class Post {
   constructor(jsonObject) {
     const thereisJsonObject = typeof jsonObject === 'object';
-    this._title = thereisJsonObject
-        ? jsonObject.meta.slug.replace('-', ' ')
-        : '';
     this.meta = {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
       date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
@@ -41,14 +37,4 @@ class Post {
     const now = new Date();
     return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
   }
-  
-  get title () {
-    return this._title;
-  }
-  
-  set title (title) {
-    this._title = title;
-    this.meta.slug = title.split(' ').join('-')
-  }
-  
 }

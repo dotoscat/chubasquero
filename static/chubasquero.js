@@ -67,8 +67,8 @@ const chubasquero = new Vue({
      * Clean post editor view.
      */
     cleanPostEditor: function () {
-      this.$refs.title.value = "";
-      this.$refs.postTextarea.value = "";
+      this.$refs.slug.value = '';
+      this.$refs.postTextarea.value = '';
     },
     /**
      * Request to the server the content of post, which is only metadata.
@@ -123,10 +123,11 @@ const chubasquero = new Vue({
     /**
      * @param {event} event On change event
      */
-    onChangeTitle: function (event) {
-      const title = event.target.value;
-      console.log("onTitleChange", title);
-      this.post.title = title;
+    onChangeSlug: function (event) {
+      const slug = event.target.value.replace(' ', '-');
+      event.target.value = slug;
+      console.log("onChangeSlug", slug);
+      this.post.meta.slug = slug;
     },
     /**
      * Clean the current sections.
