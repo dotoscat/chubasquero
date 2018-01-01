@@ -17,7 +17,7 @@ def get_post_data(post_path):
         post_text = post_file.read()
         post_doctree = publish_doctree(post_text)
         meta = get_metadata_from_doctree(post_doctree)
-        post_content = re.sub(":\w+:.*?\n", '', post_text)
+        post_content = re.sub(":\w+:.*?\n", '', post_text).lstrip()
         post = {"meta": meta, "content": post_content}
         return post
 
@@ -94,6 +94,7 @@ def save_post_locally(post):
                 else:
                     post_body += element + ", "
             post_body += '\n'
+    post_body += '\n'
     post_body += post["content"] + '\n'
     
     print("save post", post)
