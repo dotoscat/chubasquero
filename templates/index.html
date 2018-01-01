@@ -105,7 +105,7 @@
         <div id="progressSite" class="mdl-progress mdl-js-progress" v-bind:class='{"mdl-progress--indeterminate": generatingSite}'></div>
         <p>${serverResponse.stdout}</p>
         <p style="color: red;">${serverResponse.stderr}</p>
-        <button class="mdl-button mdl-js-button mdl-button--raised" v-on:click="" v-show="serverResponse.returncode === 0">
+        <button class="mdl-button mdl-js-button mdl-button--raised" v-on:click="previewSite" v-show="serverResponse.returncode === 0">
           View generated site
         </button> 
       </section>

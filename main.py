@@ -31,6 +31,11 @@ def index():
     return flask.render_template("index.html"
         , **{"server": URL, "defaultLang": chubasquero.pelicanconf.DEFAULT_LANG})
 
+@app.route("/preview", methods=["POST"])
+def preview():
+    webbrowser.open(PREVIEW_URL)
+    return ""
+
 @app.route("/close", methods=["POST"])
 def close():
     """Close the server.

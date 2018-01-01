@@ -43,10 +43,6 @@ function requestPostToServer(route, data) {
   return fetch(endpoint, fetchInit);
 }
 
-function previewSite () {
-  console.log("previsualizar sitio");
-}
-
 const chubasquero = new Vue({
   delimiters: ["${", "}"],
   el: '#chubasquero',
@@ -206,6 +202,8 @@ const chubasquero = new Vue({
         this.generatingSite = false;
       });
     },
-    previewSite: previewSite,
+    previewSite: function () {
+      requestPostToServer('/preview', {});
+    },
   }
 });
