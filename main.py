@@ -23,6 +23,17 @@ def index():
     return flask.render_template("index.html"
         , **{"server": URL, "defaultLang": chubasquero.pelicanconf.DEFAULT_LANG})
 
+@app.route("/close", methods=["POST"])
+def close():
+    """Close the server.
+    
+    Todo:
+        Close the server programmatically. This doesn't works.
+    """
+    print ("Close this app")
+    raise RuntimeError("Close backend")
+    return json.dumps({"returncode": 0})
+
 @app.route("/posts", methods=["GET"])
 def get_posts():
     posts = json.dumps(chubasquero.get_post_list())

@@ -1,5 +1,11 @@
 'use strict';
 
+window.addEventListener('beforeunload', (event) => {
+  //const message = 'Use the close button from the webapp better';
+  //event.returnValue = message;
+  return '';
+});
+
 /**
  * This performs a fetch (with GET) to the server.
  * 
@@ -56,13 +62,24 @@ const chubasquero = new Vue({
     serverResponse: {returncode: -1, stdout: '', stderr: ''},
     autosaveInterval: null,
     postTextarea: null,
-    savePostNotification: null
+    notification: null
   },
   mounted: function () {
     this.postTextarea = document.getElementById("post-textarea");
-    this.savePostNotification = document.getElementById("savepost-notification");
+    this.notification = document.getElementById("notification");
   },
   methods: {
+    /**
+     * Request close the server. The user still has to close manually the
+     * window where the webapp runs.
+     */
+    close: function () {
+      requestPostToServer('/close', {}).then((response) => {
+        this.notification.MaterialSnackbar.showSnackbar(
+          {message: 'Now you can close this window'}
+        );
+      });
+    },
     /**
      * Clean post editor view.
      */
@@ -94,7 +111,7 @@ const chubasquero = new Vue({
      */
     savePost: function () {
       if (this.post.meta.slug.length === 0){
-        this.savePostNotification.MaterialSnackbar.showSnackbar(
+        this.notification.MaterialSnackbar.showSnackbar(
           {message: 'Slug is empty!'}
         );
         return;
@@ -102,7 +119,7 @@ const chubasquero = new Vue({
       this.post.content = this.postTextarea.value;
       requestPostToServer('/post', this.post).then((response) => {
           const message = '"' + this.post.meta.slug + '" is saved.';
-          this.savePostNotification.MaterialSnackbar.showSnackbar({message: message});
+          this.notification.MaterialSnackbar.showSnackbar({message: message});
       }, (error) => console.log("post post error"));
     },
     /**

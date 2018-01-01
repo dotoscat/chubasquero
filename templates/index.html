@@ -25,6 +25,7 @@
       <a class="mdl-navigation__link" href="#" v-on:click="managePosts()">Posts</a>
       <a class="mdl-navigation__link" href="#" v-on:click="generateSite()">Generate site</a>
       <a class="mdl-navigation__link" href="#" v-on:click="previewSite()">Preview</a>
+      <!--<a class="mdl-navigation__link" href="#" v-on:click="close">Close</a>-->
     </nav>
     </div>
     <!--contenido-->
@@ -90,10 +91,6 @@
                 </textarea>
                 <label class="mdl-textfield__label" for="post-textarea">Write your content here</label>
               </div>
-              <div id="savepost-notification" class="mdl-snackbar mdl-js-snackbar">
-                  <div class="mdl-snackbar__text"></div>
-                  <button type="button" class="mdl-snackbar__action"></button>
-              </div>
             </section>
             <!--post meta-->
             <section id="meta" class="mdl-layout__tab-panel">
@@ -113,6 +110,10 @@
         </button> 
       </section>
       
+    </div>
+    <div id="notification" class="mdl-snackbar mdl-js-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <button type="button" class="mdl-snackbar__action"></button>
     </div>
     </main>
   </div>
