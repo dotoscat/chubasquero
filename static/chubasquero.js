@@ -82,6 +82,7 @@ const chubasquero = new Vue({
       requestGetToServer('/post/' + post.slug).then((response) => {
         console.log('RequestGetPost', response);
         this.postTextarea.value = response.content;
+        this.$refs.slug.value = response.meta.slug;
         componentHandler.upgradeElement(this.postTextarea);
         this.$set(this, 'post', new Post(response));
         this.startAutosave();
