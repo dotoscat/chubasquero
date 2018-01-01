@@ -74,11 +74,10 @@ const chubasquero = new Vue({
      * window where the webapp runs.
      */
     close: function () {
-      requestPostToServer('/close', {}).then((response) => {
-        this.notification.MaterialSnackbar.showSnackbar(
-          {message: 'Now you can close this window'}
-        );
-      });
+      requestPostToServer('/close', {});// Don't expect response from a closed server...
+      this.notification.MaterialSnackbar.showSnackbar(
+        {message: 'Now you can close this window'}
+      );
     },
     /**
      * Clean post editor view.

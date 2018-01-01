@@ -1,3 +1,4 @@
+import signal
 import os.path
 import subprocess
 import json
@@ -5,6 +6,8 @@ import webbrowser
 from wsgiref.simple_server import make_server
 import flask
 import chubasquero
+
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 HOST = "127.0.0.1"
 PORT = 8080
@@ -30,9 +33,11 @@ def close():
     Todo:
         Close the server programmatically. This doesn't works.
     """
-    print ("Close this app")
-    raise RuntimeError("Close backend")
-    return json.dumps({"returncode": 0})
+    global httpd
+    # httpd.server_close()
+    httpd.shutdown()
+    print("Press Ctrl + C")
+    return json.dumps({serverResponse: 0})
 
 @app.route("/posts", methods=["GET"])
 def get_posts():
