@@ -100,11 +100,16 @@ const chubasquero = new Vue({
       this.showEditor = true;
       requestGetToServer('/post/' + post.slug).then((response) => {
         console.log('RequestGetPost', response);
+        const post = new Post(response);
         this.postTextarea.value = response.content;
         this.$refs.slug.value = response.meta.slug;
+        this.$refs.tags.value = post.tags;
+        this.$refs.category.value = post.meta.category;
         componentHandler.upgradeElement(this.$refs.slug);
         componentHandler.upgradeElement(this.postTextarea);
-        this.$set(this, 'post', new Post(response));
+        componentHandler.upgradeElement(this.$refs.tags);
+        componentHandler.upgradeElement(this.$refs.category);
+        this.$set(this, 'post', post);
         this.startAutosave();
       }, (error) => console.error("RequestGetPost " + post.slug, error));
       console.log("Edit post", post);

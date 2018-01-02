@@ -24,8 +24,8 @@ class Post {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
       date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
       //modified: null,
-      tags: [],
-      category: '',
+      tags: thereisJsonObject ? jsonObject.meta.tags : '',
+      category: thereisJsonObject ? jsonObject.meta.category : '',
       authors: [],
       //summary: '',
     };
