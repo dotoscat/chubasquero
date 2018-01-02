@@ -88,6 +88,8 @@ const chubasquero = new Vue({
     cleanPostEditor: function () {
       this.$refs.slug.value = '';
       this.$refs.postTextarea.value = '';
+      this.$refs.tags.value = '';
+      this.$refs.category.value = '';
     },
     /**
      * Request to the server the content of post, which is only metadata.
