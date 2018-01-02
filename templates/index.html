@@ -96,12 +96,12 @@
             <section id="meta" class="mdl-layout__tab-panel">
               <h4>Tags</h4>
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="tags" ref="tags" ></input>
+                <input class="mdl-textfield__input" type="text" id="tags" ref="tags" v-on:change="onChangeTags"></input>
                 <label class="mdl-textfield__label" for="tags">Insert tags</label>
               </div>
               <h4>Category</h4>
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="category" ref="category" ></input>
+                <input class="mdl-textfield__input" type="text" id="category" ref="category" v-on:change="onChangeCategory"></input>
                 <label class="mdl-textfield__label" for="category">Category</label>
               </div>
             </section>

@@ -25,12 +25,23 @@ class Post {
       date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
       //modified: null,
       tags: [],
-      category: [],
+      category: '',
       authors: [],
       //summary: '',
     };
     this.content = thereisJsonObject ? jsonObject.content : '';
     this.translations = new Map();
+  }
+  
+  get tags () {
+    return this.meta.tags.replace(/, /g, ' ');
+  }
+  
+  /**
+   * @param {string} tags_string List of tags as a string
+   */
+  set tags (tags_string) {
+    this.meta.tags = tags_string.replace(/ /g, ', ');
   }
   
   static _get_now () {

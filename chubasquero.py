@@ -48,7 +48,7 @@ def get_metadata_from_doctree(post_tree):
             metadata["date"] = elem.astext()
         else:
             key = elem[0].astext()
-            if key in ("authors", "tags", "category"):
+            if key in ("authors"):
                 value = [v.strip() for v in elem[1].astext().split(',')]
             else:
                 value = elem[1].astext()

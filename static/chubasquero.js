@@ -65,6 +65,13 @@ const chubasquero = new Vue({
     this.notification = document.getElementById("notification");
   },
   methods: {
+    onChangeCategory: function (event) {
+      this.post.meta.category = event.target.value;
+    },
+    onChangeTags: function (event) {
+      const tags = event.target.value;
+      this.post.tags = tags;
+    },
     /**
      * Request close the server. The user still has to close manually the
      * window where the webapp runs.
