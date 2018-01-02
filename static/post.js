@@ -23,7 +23,7 @@ class Post {
     this.meta = {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
       date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
-      modified: thereisJsonObject ? jsonObject.meta.modified : '',
+      modified: thereisJsonObject ? jsonObject.meta.modified : null,
       tags: thereisJsonObject ? jsonObject.meta.tags : '',
       category: thereisJsonObject ? jsonObject.meta.category : '',
       authors: [],
