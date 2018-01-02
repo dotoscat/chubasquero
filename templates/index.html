@@ -48,7 +48,7 @@
             <tr v-for="post in posts" :key="post.slug">
               <td class="mdl-data-table__cell--non-numeric">${post.slug}</td>
               <td class="mdl-data-table__cell--non-numeric">${post.date}</td>
-              <td class="mdl-data-table__cell--non-numeric"><!--Modified--></td>
+              <td class="mdl-data-table__cell--non-numeric">${post.modified}</td>
               <td class="mdl-data-table__cell--non-numeric">
                 <!-- What to do with this post -->
                 <button class="mdl-button mdl-js-button mdl-button--colored" v-on:click="editPost(post)">

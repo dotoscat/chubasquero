@@ -23,7 +23,7 @@ class Post {
     this.meta = {
       slug: thereisJsonObject ? jsonObject.meta.slug : '',
       date: thereisJsonObject ? jsonObject.meta.date : Post._get_now(),
-      //modified: null,
+      modified: thereisJsonObject ? jsonObject.meta.modified : '',
       tags: thereisJsonObject ? jsonObject.meta.tags : '',
       category: thereisJsonObject ? jsonObject.meta.category : '',
       authors: [],
@@ -31,6 +31,13 @@ class Post {
     };
     this.content = thereisJsonObject ? jsonObject.content : '';
     this.translations = new Map();
+  }
+  
+  /**
+   * Mark this modified.
+   */
+  modify(){
+    this.meta.modified = Post._get_now();
   }
   
   get tags () {

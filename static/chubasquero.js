@@ -125,6 +125,9 @@ const chubasquero = new Vue({
         return;
       }
       this.post.content = this.postTextarea.value;
+      if (!this.isNewPost) {
+        this.post.modify();
+      }
       requestPostToServer('/post', this.post).then((response) => {
           const message = '"' + this.post.meta.slug + '" is saved.';
           this.notification.MaterialSnackbar.showSnackbar({message: message});
