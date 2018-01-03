@@ -32,6 +32,22 @@ class Post {
     this.content = thereisJsonObject ? jsonObject.content : '';
     this.translations = new Map();
   }
+
+  /**
+   * @param {string} translation Identifier of the translations
+   */
+  getContentByTranslation (translation) {
+    return this.translations.get(translation);
+  }
+  
+  /**
+   * Add a new translation to this post.
+   * 
+   * @param {string} translation Identifier for this translation
+   */
+  addTranslation (translation) {
+    this.translations.set(translation, new Translation());
+  }
   
   /**
    * Mark this modified.

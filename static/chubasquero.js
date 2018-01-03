@@ -57,13 +57,25 @@ const chubasquero = new Vue({
     generatingSite: false,
     serverResponse: {returncode: -1, stdout: '', stderr: ''},
     postTextarea: null,
-    notification: null
+    notification: null,
+    addTranslationCounter: 0,
   },
   mounted: function () {
     this.postTextarea = document.getElementById("post-textarea");
     this.notification = document.getElementById("notification");
   },
+  computed: {
+    postTranslations: function () {
+      console.log('update translations...');
+      return Array.from(this.post.translations.keys());
+    },
+  },
   methods: {
+    addTranslation: function (event) {
+      const value = this.$refs.translation.value;
+      this.post.addTranslation(value);
+      this.$refs.translation.value = '';
+    },
     onChangePostContent: function (event) {
       this.post.content = event.target.value;
     },
