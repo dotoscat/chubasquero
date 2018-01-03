@@ -67,6 +67,7 @@ const chubasquero = new Vue({
   methods: {
     addTranslation: function (event) {
       const value = this.$refs.translation.value;
+      if (value.match(/[aA-zZ]{2}/) === null) return;
       // FIXME: Post has a method to add a translation. Use next line cause Vuejs
       this.$set(this.post.translations, value, new Translation()); 
       this.$refs.translation.value = '';
