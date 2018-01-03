@@ -57,23 +57,43 @@ const chubasquero = new Vue({
     generatingSite: false,
     serverResponse: {returncode: -1, stdout: '', stderr: ''},
     postTextarea: null,
+    currentPost: null,
     notification: null,
-    addTranslationCounter: 0,
   },
   mounted: function () {
     this.postTextarea = document.getElementById("post-textarea");
     this.notification = document.getElementById("notification");
   },
   methods: {
+    /**
+     * Display the selected translation
+     * 
+     * @param {string} translation Selected translation
+     */
+    changeTranslation: function (translation) {
+      console.log('current translation is', translation);
+      if (translation === DEFAULT_LANG){
+        this.currentPost = this.post;
+      }else{
+        this.currentPost = this.post.translations[translation];
+      }
+      this.$refs.postTextarea.value = this.currentPost.content;
+      componentHandler.upgradeElement(this.$refs.postTextarea);
+    },
+    /**
+     * Add a new translation to the current Post
+     */
     addTranslation: function (event) {
       const value = this.$refs.translation.value;
       if (value.match(/[aA-zZ]{2}/) === null) return;
       // FIXME: Post has a method to add a translation. Use next line cause Vuejs
       this.$set(this.post.translations, value, new Translation()); 
       this.$refs.translation.value = '';
+      this.changeTranslation(value);
     },
     onChangePostContent: function (event) {
-      this.post.content = event.target.value;
+      console.log('onChangePostContent')
+      this.currentPost.content = event.target.value;
     },
     onChangeCategory: function (event) {
       this.post.meta.category = event.target.value;
@@ -117,6 +137,7 @@ const chubasquero = new Vue({
         this.$refs.slug.value = response.meta.slug;
         this.$refs.tags.value = post.tags;
         this.$refs.category.value = post.meta.category;
+        this.currentPost = post;
         componentHandler.upgradeElement(this.$refs.slug);
         componentHandler.upgradeElement(this.postTextarea);
         componentHandler.upgradeElement(this.$refs.tags);
@@ -135,7 +156,6 @@ const chubasquero = new Vue({
         );
         return;
       }
-      this.post.content = this.postTextarea.value;
       if (!this.isNewPost) {
         this.post.modify();
       }
@@ -172,6 +192,7 @@ const chubasquero = new Vue({
       this.cleanPostEditor();
       this.showEditor = true;
       this.$set(this, "post", new Post());
+      this.currentPost = this.post;
       console.log("new post")
     },
     /**

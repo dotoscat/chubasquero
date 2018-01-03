@@ -86,12 +86,13 @@
                 </div>
               </div>
               <!--Change language-->
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                v-on:click="changeTranslation('{{defaultLang}}')">
                 {{defaultLang}}
               </button>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
                 v-for="(value, key) in post.translations"
-                v-on:click=""
+                v-on:click="changeTranslation(key)"
                 >${key}</button>
               <!--TODO: Insert here buttons with the post translations
               <!--insert new translation-->
