@@ -85,6 +85,20 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised" v-on:click="savePost">Save</button>
                 </div>
               </div>
+              <!--Change language-->
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="">
+                {{defaultLang}}
+              </button>
+              <!--TODO: Insert here buttons with the post translations
+              <!--insert new translation-->
+              <div class="mdl-textfield mdl-js-textfield" id="translation-field">
+                <input class="mdl-textfield__input" type="text" id="translation" ref="translation" v-on:change="" maxlength="2"></input>
+                <label class="mdl-textfield__label" for="translation">en, es, fr...</label>
+              </div>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                <i class="material-icons">add</i>
+              </button>
+              <!--end insert new translation-->
               <!--(big) text area-->
               <div class="mdl-textfield mdl-js-textfield post-content">
                 <textarea class="mdl-textfield__input" type="text" rows="25" id="post-textarea" ref="postTextarea" v-on:change="onChangePostContent">
