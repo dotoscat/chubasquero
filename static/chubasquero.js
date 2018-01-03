@@ -56,7 +56,6 @@ const chubasquero = new Vue({
     showGenerateSite: false,
     generatingSite: false,
     serverResponse: {returncode: -1, stdout: '', stderr: ''},
-    autosaveInterval: null,
     postTextarea: null,
     notification: null
   },
@@ -65,6 +64,9 @@ const chubasquero = new Vue({
     this.notification = document.getElementById("notification");
   },
   methods: {
+    onChangePostContent: function (event) {
+      this.post.content = event.target.value;
+    },
     onChangeCategory: function (event) {
       this.post.meta.category = event.target.value;
     },
@@ -112,7 +114,6 @@ const chubasquero = new Vue({
         componentHandler.upgradeElement(this.$refs.tags);
         componentHandler.upgradeElement(this.$refs.category);
         this.$set(this, 'post', post);
-        this.startAutosave();
       }, (error) => console.error("RequestGetPost " + post.slug, error));
       console.log("Edit post", post);
     },
@@ -136,22 +137,6 @@ const chubasquero = new Vue({
       }, (error) => console.log("post post error"));
     },
     /**
-     * Each a few seconds the contents of the textarea is saved
-     * in the post model 
-     */
-    startAutosave: function () {
-      this.autosaveInterval = setInterval(() => {
-        this.post.content = this.postTextarea.value;
-      }, 5000);
-    },
-    /**
-     * Stop autosaving the post textarea
-     */
-    stopAutosave: function () {
-      clearInterval(this.autosaveInterval);
-      this.autosaveInterval = null;
-    },
-    /**
      * @param {event} event On change event
      */
     onChangeSlug: function (event) {
@@ -169,7 +154,6 @@ const chubasquero = new Vue({
       this.showPosts = false;
       this.showEditor = false;
       this.showGenerateSite = false;
-      this.stopAutosave();
     },
     /**
      * Prepare content to edit a post
@@ -180,7 +164,6 @@ const chubasquero = new Vue({
       this.cleanPostEditor();
       this.showEditor = true;
       this.$set(this, "post", new Post());
-      this.startAutosave();
       console.log("new post")
     },
     /**

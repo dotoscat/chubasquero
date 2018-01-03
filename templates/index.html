@@ -87,7 +87,7 @@
               </div>
               <!--(big) text area-->
               <div class="mdl-textfield mdl-js-textfield post-content">
-                <textarea class="mdl-textfield__input" type="text" rows="25" id="post-textarea" ref="postTextarea">
+                <textarea class="mdl-textfield__input" type="text" rows="25" id="post-textarea" ref="postTextarea" v-on:change="onChangePostContent">
                 </textarea>
                 <label class="mdl-textfield__label" for="post-textarea">Write your content here</label>
               </div>
