@@ -90,9 +90,9 @@
                 {{defaultLang}}
               </button>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-                v-for="translation in postTranslations"
+                v-for="(value, key) in post.translations"
                 v-on:click=""
-                >${translation}</button>
+                >${key}</button>
               <!--TODO: Insert here buttons with the post translations
               <!--insert new translation-->
               <div class="mdl-textfield mdl-js-textfield" id="translation-field">

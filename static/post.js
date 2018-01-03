@@ -30,14 +30,15 @@ class Post {
       //summary: '',
     };
     this.content = thereisJsonObject ? jsonObject.content : '';
-    this.translations = new Map();
+    // FIXME: replace Map by object because vuejs
+    this.translations = {};
   }
 
   /**
    * @param {string} translation Identifier of the translations
    */
   getContentByTranslation (translation) {
-    return this.translations.get(translation);
+    return this.translations[translation];
   }
   
   /**

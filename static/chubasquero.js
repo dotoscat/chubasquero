@@ -64,16 +64,11 @@ const chubasquero = new Vue({
     this.postTextarea = document.getElementById("post-textarea");
     this.notification = document.getElementById("notification");
   },
-  computed: {
-    postTranslations: function () {
-      console.log('update translations...');
-      return Array.from(this.post.translations.keys());
-    },
-  },
   methods: {
     addTranslation: function (event) {
       const value = this.$refs.translation.value;
-      this.post.addTranslation(value);
+      // FIXME: Post has a method to add a translation. Use next line cause Vuejs
+      this.$set(this.post.translations, value, new Translation()); 
       this.$refs.translation.value = '';
     },
     onChangePostContent: function (event) {
