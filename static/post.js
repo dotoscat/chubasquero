@@ -15,6 +15,8 @@ class Translation {
  * This is a post.
  * @class
  *
+ * This uses the global constant DEFAULT_LANG
+ * 
  * @todo Title is inside content. Is better use the slug.
  */
 class Post {
@@ -26,6 +28,7 @@ class Post {
       modified: thereisJsonObject ? jsonObject.meta.modified : null,
       tags: thereisJsonObject ? jsonObject.meta.tags : '',
       category: thereisJsonObject ? jsonObject.meta.category : '',
+      lang: thereisJsonObject ? jsonObject.meta.lang : DEFAULT_LANG,
       authors: [],
       //summary: '',
     };

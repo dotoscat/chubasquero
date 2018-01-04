@@ -100,8 +100,23 @@ def save_post_locally(post):
     print("save post", post)
     print("post body", post_body)
     
-    filename = post["meta"]["slug"] + ".rst"
+    slug = post["meta"]["slug"]
+    filename = slug + ".rst"
     file_path = os.path.join(CONTENT_PATH, filename)
     
     with open(file_path, "w", encoding="utf8") as post_file:
         post_file.write(post_body)
+    
+    for lang in post["translations"]:
+        translation_filename = "{}.{}.rst".format(post["meta"]["slug"], lang)
+        translation_filepath =  os.path.join(CONTENT_PATH, translation_filename)
+        translation = post["translations"][lang]
+        body = ""
+        body += ":slug: {}\n".format(slug)
+        body += ":lang: {}\n".format(lang)
+        body += ":translation: {}\n".format("true" if translation["translation"] else "false")
+        body += ":date: {}\n".format(post["meta"]["date"])
+        body += '\n'
+        body += translation["content"]
+        with open(translation_filepath, "w", encoding="utf8") as translation_file:
+            translation_file.write(body)
