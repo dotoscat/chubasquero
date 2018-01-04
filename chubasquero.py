@@ -69,9 +69,15 @@ def do_with_file(path, action):
         return action(this_file)
 
 def get_post_list():
-    """Returns a post list stored on :obj:`pelicanconf.PATH`."""
-    return [do_with_file(post.path, get_metadata_from_file)
-        for post in os.scandir(CONTENT_PATH)]
+    """Returns a post list stored on :obj:`pelicanconf.PATH`.
+    
+    Only returns the original posts, not translations
+    """
+    post_list = [do_with_file(post.path, get_metadata_from_file)
+        for post in os.scandir(CONTENT_PATH)
+        if len(post.path.split('.')) == 2 and post.name.endswith(".rst")]
+    print("post list", post_list)
+    return post_list
 
 def save_post_locally(post):
     """Saves the post object to disk.
