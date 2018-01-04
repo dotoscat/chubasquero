@@ -11,6 +11,11 @@ except ImportError:
 
 CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
 
+def get_post_translations(slug):
+    posts = [get_post_data(entry) for entry in os.scandir(CONTENT_PATH)
+    if entry.name.split('.')[0] == slug and len(entry.name.split('.')) > 2]
+    return {translation["meta"]["lang"] : translation for translation in posts}
+
 def get_post_data(post_path):
     """Returns a dict of the content of the post."""
     with open(post_path) as post_file:
