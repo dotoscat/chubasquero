@@ -5,9 +5,12 @@
  * @class
  */
 class Translation {
-  constructor() {
-    this.translation = true;
-    this.content = '';
+  constructor(jsonObject) {
+    const thereisJsonObject = typeof jsonObject === 'object';
+    this.translation = thereisJsonObject
+      ? jsonObject.meta.translation 
+      : true;
+    this.content = thereisJsonObject ? jsonObject.content : '';
   }
 }
 
@@ -35,6 +38,11 @@ class Post {
     this.content = thereisJsonObject ? jsonObject.content : '';
     // FIXME: replace Map by object because vuejs
     this.translations = {};
+    if (thereisJsonObject) {
+      for (const lang in jsonObject.translations) {
+        this.translations[lang] = new Translation(jsonObject.translations[lang]);
+      }
+    }
   }
 
   /**

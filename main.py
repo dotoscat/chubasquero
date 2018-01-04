@@ -70,7 +70,7 @@ def get_post(slug):
     filepath = os.path.join(chubasquero.CONTENT_PATH, filename)
     return json.dumps(
         dict(**chubasquero.get_post_data(filepath)
-            , **chubasquero.get_post_translations(slug)))
+            , translations=chubasquero.get_post_translations(slug)))
 
 @app.route("/generate-site")
 def generate_site():
