@@ -32,7 +32,7 @@ URL = "http://{}:{}".format(HOST, PORT)
 PREVIEW_PORT = 8000
 PREVIEW_URL = "http://{}:{}".format(HOST, PREVIEW_PORT)
 
-app = flask.Flask(__name__, static_url_path='')
+app = flask.Flask(os.getcwd(), static_url_path='')
 
 @app.route("/")
 def index():

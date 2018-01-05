@@ -16,8 +16,11 @@
 
 import re
 import os.path
+import sys
 from docutils.core import publish_doctree
 from docutils import nodes
+
+sys.path.insert(0, os.getcwd())
 
 try:
     import pelicanconf
