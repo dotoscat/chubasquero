@@ -53,19 +53,19 @@ def get_metadata_from_doctree(post_tree):
         doctree. Extract tags from docinfo anywere of the doctree.
     """
     metadata = {}
-    docinfo = post_tree[0]
-    if not isinstance(docinfo, nodes.docinfo):
-        return None
-    for elem in docinfo:
-        if isinstance(elem, nodes.date):
-            metadata["date"] = elem.astext()
-        else:
-            key = elem[0].astext()
-            if key in ("authors"):
-                value = [v.strip() for v in elem[1].astext().split(',')]
+    for child in post_tree:
+        if not isinstance(child, nodes.docinfo):
+            continue
+        for elem in child:
+            if isinstance(elem, nodes.date):
+                metadata["date"] = elem.astext()
             else:
-                value = elem[1].astext()
-            metadata[key] = value
+                key = elem[0].astext()
+                if key in ("authors"):
+                    value = [v.strip() for v in elem[1].astext().split(',')]
+                else:
+                    value = elem[1].astext()
+                metadata[key] = value
     return metadata
 
 def do_with_file(path, action):
