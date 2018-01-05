@@ -1,5 +1,3 @@
-import signal
-import os.path
 # Chubasquero, a CMS built on top of Pelican
 # Copyright (C) 2018 Oscar (dotoscat) Triano
 
@@ -16,6 +14,8 @@ import os.path
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import signal
+import os.path
 import subprocess
 import json
 import webbrowser
@@ -32,8 +32,6 @@ URL = "http://{}:{}".format(HOST, PORT)
 PREVIEW_PORT = 8000
 PREVIEW_URL = "http://{}:{}".format(HOST, PREVIEW_PORT)
 
-preview_server = subprocess.Popen(['python', '-m', 'http.server', str(PREVIEW_PORT)]
-    , cwd="output")
 app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
@@ -98,8 +96,13 @@ def generate_site():
         , "stderr": completed.stderr.decode()}
     return json.dumps(response)
 
-if __name__ == "__main__":
+def main():
+    preview_server = subprocess.Popen(['python', '-m', 'http.server', str(PREVIEW_PORT)]
+    , cwd="output")
     with make_server(HOST, PORT, app) as httpd:
         print("open", URL)
         webbrowser.open(URL)
         httpd.serve_forever()
+
+if __name__ == "__main__":
+    main()
