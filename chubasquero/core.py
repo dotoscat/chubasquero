@@ -21,7 +21,7 @@ import json
 import webbrowser
 from wsgiref.simple_server import make_server
 import flask
-import chubasquero
+from . import post as chubasquero
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
