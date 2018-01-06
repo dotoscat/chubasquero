@@ -163,6 +163,12 @@ const chubasquero = new Vue({
         this.$refs.slug.value = response.meta.slug;
         this.$refs.tags.value = post.tags;
         this.$refs.category.value = post.meta.category;
+        this.$refs.isPage.checked = post.isPage;
+        if (post.isPage){
+          this.$refs.isPage.parentElement.MaterialCheckbox.check();
+        }else{
+          this.$refs.isPage.parentElement.MaterialCheckbox.uncheck();
+        }
         this.currentPost = post;
         componentHandler.upgradeElement(this.$refs.slug);
         componentHandler.upgradeElement(this.postTextarea);

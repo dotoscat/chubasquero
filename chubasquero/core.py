@@ -86,9 +86,13 @@ def get_post(slug):
     """Returns a JSON object of the post to be used by javascript Post class."""
     filename = slug + ".rst";
     filepath = os.path.join(chubasquero.CONTENT_PATH, filename)
-    return json.dumps(
-        dict(**chubasquero.get_post_data(filepath)
-            , translations=chubasquero.get_post_translations(slug)))
+    jsonObject = {}
+    if not os.path.exists(filepath):
+        filepath = os.path.join(chubasquero.CONTENT_PATH_PAGES, filename)
+        jsonObject["isPage"] = True
+    jsonObject.update(**chubasquero.get_post_data(filepath)
+        , translations=chubasquero.get_post_translations(slug))
+    return json.dumps(jsonObject)
 
 @app.route("/generate-site")
 def generate_site():

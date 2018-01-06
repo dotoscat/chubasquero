@@ -42,6 +42,9 @@ def get_post_translations(slug):
     """
     posts = [get_post_data(entry) for entry in os.scandir(CONTENT_PATH)
     if entry.name.split('.')[0] == slug and len(entry.name.split('.')) > 2]
+    if not posts:
+        posts = [get_post_data(entry) for entry in os.scandir(CONTENT_PATH_PAGES)
+            if entry.name.split('.')[0] == slug and len(entry.name.split('.')) > 2]
     return {translation["meta"]["lang"] : translation for translation in posts}
 
 def get_post_data(post_path):
