@@ -51,6 +51,7 @@ class Post {
       authors: [],
       //summary: '',
     };
+    this.isPage = false;
     this.content = thereisJsonObject ? jsonObject.content : '';
     // FIXME: replace Map by object because vuejs
     this.translations = {};

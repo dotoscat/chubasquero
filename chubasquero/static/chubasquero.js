@@ -82,6 +82,13 @@ const chubasquero = new Vue({
   },
   methods: {
     /**
+     * Mark this post as page.
+     */
+    postIsPage: function (event) {
+      const isPage = event.target.checked;
+      this.post.isPage = isPage;
+    },
+    /**
      * Display the selected translation
      * 
      * @param {string} translation Selected translation
@@ -137,6 +144,8 @@ const chubasquero = new Vue({
       this.$refs.postTextarea.value = '';
       this.$refs.tags.value = '';
       this.$refs.category.value = '';
+      this.$refs.isPage.checked = false;
+      this.$refs.isPage.parentElement.MaterialCheckbox.uncheck();
     },
     /**
      * Request to the server the content of post, which is only metadata.

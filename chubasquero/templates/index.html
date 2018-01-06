@@ -128,7 +128,7 @@
                 <label class="mdl-textfield__label" for="category">Category</label>
               </div>
               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="is-a-page">
-                <input type="checkbox" id="is-a-page" class="mdl-checkbox__input"></input>
+                <input type="checkbox" id="is-a-page" class="mdl-checkbox__input" ref="isPage" v-on:change="postIsPage"></input>
                 <span class="mdl-checbox__label">This is a page</span>
               </label>
             </section>

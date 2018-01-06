@@ -29,6 +29,7 @@ except ImportError:
     exit(1)
 
 CONTENT_PATH = os.path.abspath(pelicanconf.PATH)
+CONTENT_PATH_PAGES = os.path.join(CONTENT_PATH, "pages")
 
 def get_post_translations(slug):
     """Get the translations of a post based on its slug.
@@ -141,6 +142,13 @@ def save_post_locally(post):
     slug = post["meta"]["slug"]
     filename = slug + ".rst"
     file_path = os.path.join(CONTENT_PATH, filename)
+    
+    if post["isPage"]:
+        file_path = os.path.join(CONTENT_PATH_PAGES, filename)
+        if not os.path.isdir(CONTENT_PATH_PAGES):
+            os.mkdir(CONTENT_PATH_PAGES)
+    else:
+        file_path = os.path.join(CONTENT_PATH, filename)
     
     with open(file_path, "w", encoding="utf8") as post_file:
         post_file.write(post_body)
