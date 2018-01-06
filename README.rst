@@ -24,7 +24,8 @@ Features
 * Create posts.
 * Edit posts.
 * Edit post metadata such as category or tags.
-* Add translations to posts.
+* Convert a post to page and viceversa.
+* Add translations to posts/pages.
 * Generate the site.
 * Preview the site.
 
