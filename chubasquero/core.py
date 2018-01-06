@@ -32,7 +32,11 @@ URL = "http://{}:{}".format(HOST, PORT)
 PREVIEW_PORT = 8000
 PREVIEW_URL = "http://{}:{}".format(HOST, PREVIEW_PORT)
 
-app = flask.Flask(os.getcwd(), static_url_path='')
+print("__file__")
+print(__file__)
+print("file path", os.path.dirname(__file__))
+
+app = flask.Flask(__name__, static_url_path='')
 
 @app.route("/")
 def index():
