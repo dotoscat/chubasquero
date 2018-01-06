@@ -109,6 +109,15 @@ def get_post_list():
     post_list = [do_with_file(post.path, get_metadata_from_file)
         for post in os.scandir(CONTENT_PATH)
         if len(post.path.split('.')) == 2 and post.name.endswith(".rst")]
+    for post in post_list:
+        post["isPage"] = False
+    if os.path.isdir(CONTENT_PATH_PAGES):
+        pages_list = [do_with_file(post.path, get_metadata_from_file)
+            for post in os.scandir(CONTENT_PATH_PAGES)
+            if len(post.path.split('.')) == 2 and post.name.endswith(".rst")]
+        for page in pages_list:
+            page["isPage"] = True
+        post_list.extend(pages_list)
     print("post list", post_list)
     return post_list
 

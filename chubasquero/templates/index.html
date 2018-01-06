@@ -41,6 +41,7 @@
               <th class="mdl-data-table__cell--non-numeric">Name</th>
               <th class="mdl-data-table__cell--non-numeric">Date</th>
               <th class="mdl-data-table__cell--non-numeric">Modified</th>
+              <th class="mdl-data-table__cell--non-numeric">Is page</th>
               <th class="mdl-data-table__cell--non-numeric">Action</th>
             </tr>
           </thead>
@@ -49,6 +50,7 @@
               <td class="mdl-data-table__cell--non-numeric">${post.slug}</td>
               <td class="mdl-data-table__cell--non-numeric">${post.date}</td>
               <td class="mdl-data-table__cell--non-numeric">${post.modified}</td>
+              <td class="mdl-data-table__cell--non-numeric">${post.isPage}</td>
               <td class="mdl-data-table__cell--non-numeric">
                 <!-- What to do with this post -->
                 <button class="mdl-button mdl-js-button mdl-button--colored" v-on:click="editPost(post)">
