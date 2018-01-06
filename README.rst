@@ -29,6 +29,15 @@ Features
 * Generate the site.
 * Preview the site.
 
+How to install it
+=================
+
+.. code::
+
+    > pip install chubasquero
+
+This will install the last version avaliable of Pelican.
+
 How to use it
 =============
 
